@@ -25,16 +25,16 @@ async function run() {
   try {
     // Connect the client to the server	(optional starting in v4.7)
     await client.connect();
-    const kachaBazarCollection = client.db("kachaBazarDB").collection("kachaBazar");
+    const artAndCraftCollection = client.db("artAndCraftDB").collection("artAndCraft");
 
     app.post("/products", async (req, res) => {
       const items = req.body;
-      const result = await kachaBazarCollection.insertOne(items);
+      const result = await artAndCraftCollection.insertOne(items);
       res.send(result);
     });
 
     app.get("/products", async (req, res) => {
-      const cursor = kachaBazarCollection.find();
+      const cursor = artAndCraftCollection.find();
       const result = await cursor.toArray();
 
       res.send(result);
@@ -43,7 +43,7 @@ async function run() {
     app.get("/products/:id", async (req, res) => {
       const id = req.params.id;
       const query = { _id: new ObjectId(id) };
-      const item = await kachaBazarCollection.findOne(query);
+      const item = await artAndCraftCollection.findOne(query);
 
       res.send(item);
     });
@@ -64,7 +64,7 @@ async function run() {
         },
       };
 
-      const result = await kachaBazarCollection.updateOne(filter, updateItem, options);
+      const result = await artAndCraftCollection.updateOne(filter, updateItem, options);
 
       res.send(result);
     });
@@ -72,7 +72,7 @@ async function run() {
     app.delete("/products/:id", async (req, res) => {
       const id = req.params.id;
       const query = { _id: new ObjectId(id) };
-      const result = await kachaBazarCollection.deleteOne(query);
+      const result = await artAndCraftCollection.deleteOne(query);
 
       res.send(result);
     });
