@@ -58,9 +58,12 @@ async function run() {
           name: item.name,
           price: item.price,
           category: item.category,
+          rating: item.rating,
+          customization: item.customization,
+          stock: item.stock,
           details: item.details,
           photo: item.photo,
-          stock: item.stock,
+          processingTime: item.processingTime,
         },
       };
 
