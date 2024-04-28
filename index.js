@@ -37,7 +37,7 @@ async function run() {
       res.send(result);
     });
 
-    app.get("/products/:category", async (req, res) => {
+    app.get("/products-category/:category", async (req, res) => {
       const userCategory = req.params.category;
       const query = { category: userCategory };
       const result = await artAndCraftCollection.find(query).toArray();
