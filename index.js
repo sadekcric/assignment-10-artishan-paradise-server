@@ -40,6 +40,13 @@ async function run() {
       res.send(result);
     });
 
+    app.get("/products/:category", async (req, res) => {
+      const userCategory = req.params.category;
+      const query = { category: userCategory };
+      const result = await artAndCraftCollection.find(query).toArray();
+      res.send(result);
+    });
+
     app.get("/products/:id", async (req, res) => {
       const id = req.params.id;
       const query = { _id: new ObjectId(id) };
