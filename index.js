@@ -23,6 +23,7 @@ const client = new MongoClient(uri, {
 async function run() {
   try {
     const artAndCraftCollection = client.db("artAndCraftDB").collection("artAndCraft");
+    const category = client.db("artAndCraftDB").collection("category");
 
     app.post("/products", async (req, res) => {
       const items = req.body;
@@ -32,6 +33,13 @@ async function run() {
 
     app.get("/products", async (req, res) => {
       const cursor = artAndCraftCollection.find();
+      const result = await cursor.toArray();
+
+      res.send(result);
+    });
+
+    app.get("/category", async (req, res) => {
+      const cursor = category.find();
       const result = await cursor.toArray();
 
       res.send(result);
